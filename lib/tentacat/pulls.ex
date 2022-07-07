@@ -142,4 +142,18 @@ defmodule Tentacat.Pulls do
   def has_been_merged(client, owner, repo, number) do
     get("repos/#{owner}/#{repo}/pulls/#{number}/merge", client)
   end
+
+  @doc """
+  List files changed in a pull request.
+
+  ## Example
+
+      Tentacat.Pulls.files client, "elixir-lang", "elixir", "4876"
+
+  More info at: https://docs.github.com/en/rest/pulls/pulls#list-pull-requests-files
+  """
+  @spec files(Client.t(), binary, binary, binary | integer) :: Tentacat.response()
+  def files(client, owner, repo, number) do
+    get("repos/#{owner}/#{repo}/pulls/#{number}/files", client)
+  end
 end
