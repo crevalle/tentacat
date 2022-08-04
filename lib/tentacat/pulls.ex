@@ -156,4 +156,18 @@ defmodule Tentacat.Pulls do
   def files(client, owner, repo, number) do
     get("repos/#{owner}/#{repo}/pulls/#{number}/files", client)
   end
+
+  @doc """
+  List commits on a pull request.
+
+  ## Example
+
+      Tentacat.Pulls.commits client, "elixir-lang", "elixir", "4876"
+
+  More info at: https://docs.github.com/en/rest/pulls/pulls#list-commits-on-a-pull-request
+  """
+  @spec commits(Client.t(), binary, binary, binary | integer) :: Tentacat.response()
+  def commits(client, owner, repo, number) do
+    get("repos/#{owner}/#{repo}/pulls/#{number}/commits", client)
+  end
 end
