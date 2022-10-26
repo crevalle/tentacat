@@ -81,4 +81,19 @@ defmodule Tentacat.Repositories.Branches do
   def update_protection(client \\ %Client{}, owner, repo, branch, body) when is_map(body) do
     put("repos/#{owner}/#{repo}/branches/#{branch}/protection", client, body)
   end
+
+  @doc """
+  Get Branch Protection.
+
+  ## Example
+
+      Tentacat.Repositories.Branches.protection "elixir-lang", "elixir", "feature",
+      Tentacat.Repositories.Branches.protection client, "elixir-lang", "elixir", "feature"
+
+  More info at: https://developer.github.com/v3/repos/branches/#get-branch-protection
+  """
+  @spec protection(Client.t(), binary, binary, binary) :: Tentacat.response()
+  def protection(client \\ %Client{}, owner, repo, branch) do
+    get("repos/#{owner}/#{repo}/branches/#{branch}/protection", client)
+  end
 end
