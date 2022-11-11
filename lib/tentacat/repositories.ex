@@ -127,4 +127,13 @@ defmodule Tentacat.Repositories do
   def delete(client, owner, repo) do
     delete("repos/#{owner}/#{repo}", client)
   end
+
+  @doc """
+
+  Update repository settings.
+  """
+  @spec update(Client.t(), binary, binary, map) :: Tentacat.response()
+  def update(client, owner, repo, options \\ %{}) do
+    patch("repos/#{owner}/#{repo}", client, options)
+  end
 end
