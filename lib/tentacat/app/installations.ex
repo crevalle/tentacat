@@ -86,4 +86,32 @@ defmodule Tentacat.App.Installations do
   def list_repositories_for_user(client, installation_id) do
     get("user/installations/#{installation_id}/repositories", client)
   end
+
+  @doc """
+  Suspends the app on the given installation.  Requires a JWT.
+
+  ## Example
+
+      Tentacat.App.Installations.suspend client, 154
+
+  More info at: https://docs.github.com/en/rest/apps/apps?apiVersion=2022-11-28#suspend-an-app-installation
+  """
+  @spec suspend(Client.t(), integer) :: Tentacat.response()
+  def suspend(client, installation_id) do
+    put("app/installations/#{installation_id}/suspended", client, nil)
+  end
+
+  @doc """
+  Unsuspends the app on the given installation.  Requires a JWT.
+
+  ## Example
+
+      Tentacat.App.Installations.unsuspend client, 154
+
+  More info at: https://docs.github.com/en/rest/apps/apps?apiVersion=2022-11-28#unsuspend-an-app-installation
+  """
+  @spec unsuspend(Client.t(), integer) :: Tentacat.response()
+  def unsuspend(client, installation_id) do
+    delete("app/installations/#{installation_id}/suspended", client, nil)
+  end
 end
