@@ -114,4 +114,19 @@ defmodule Tentacat.App.Installations do
   def unsuspend(client, installation_id) do
     delete("app/installations/#{installation_id}/suspended", client, nil)
   end
+
+  @doc """
+  Uninstalls the app on the given installation.  Requires a JWT.
+
+  ## Example
+
+      Tentacat.App.Installations.uninstall client, 154
+
+  More info at: https://docs.github.com/en/rest/apps/apps?apiVersion=2022-11-28#delete-an-installation-for-the-authenticated-app
+  """
+  @spec uninstall(Client.t(), integer) :: Tentacat.response()
+  def uninstall(client, installation_id) do
+    delete("app/installations/#{installation_id}", client, nil)
+  end
+
 end
